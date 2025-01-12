@@ -25,6 +25,34 @@ app.post("/signup", async (req, res) => {
   }
 });
 
+app.get("/user", async (req, res) => {
+  try {
+    const user = await User.findOne(req.body);
+
+    if (!user) {
+      res.send("User Does Not Exist!");
+    } else {
+      res.send(user);
+    }
+  } catch (error) {
+    console.log(error, error.message);
+  }
+});
+
+app.get("/feed", async (req, res) => {
+  try {
+    const user = await User.find();
+    if (!user) {
+      res.send(user);
+    } else {
+      consol.log("Cannot Retrieve Users: They Don't Exist!");
+    }
+  } catch (error) {
+    console.log(`There is a error finding Users ${error}`);
+  }
+});
+
+
 // Basic GET route for testing server
 // app.get("/", (req, res) => {
 //   res.send("Server is working!");
